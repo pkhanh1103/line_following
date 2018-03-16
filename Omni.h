@@ -1,6 +1,3 @@
-#ifndef Omni_h
-#define Omni_h
-#include "Arduino.h"
 #include <SMotor.h>
 #include "definition.h"
 
@@ -26,5 +23,3 @@ class Omni
     double V1, V2, V3;
     double sine, cosine;
 };
-
-#endif
