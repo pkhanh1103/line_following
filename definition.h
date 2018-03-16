@@ -13,10 +13,10 @@
 
 /* ----- Define encoder pins ----- */
 #define A1 2
-#define B1 30 //19 //30
+#define B1 30 //19
 
 #define A2 3
-#define B2 32 //20 //32
+#define B2 32 //20
 
 #define A3 18
-#define B3 34 //21 //34
+#define B3 34 //21

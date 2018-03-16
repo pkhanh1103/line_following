@@ -3,16 +3,16 @@
 const int sampleRate = 10;
 const double kp = 7;
 const double ki = 7;
-const double kd = 0.05;
+const double kd = 0.02;
 
 Omni::Omni():
   Motor1(IN1, IN2, EN1, A1, B1),
   Motor2(IN3, IN4, EN2, A2, B2),
   Motor3(IN5, IN6, EN3, A3, B3)
 {
-//  Motor1.pidSet(kp, ki, kd, sampleRate);
-//  Motor2.pidSet(kp, ki, kd, sampleRate);
-//  Motor3.pidSet(kp, ki, kd, sampleRate);    
+  Motor1.pidSet(kp, ki, kd, sampleRate);
+  Motor2.pidSet(kp, ki, kd, sampleRate);
+  Motor3.pidSet(kp, ki, kd, sampleRate);    
 }
 
 void Omni::stop(void)
@@ -46,7 +46,6 @@ void Omni::move(int angle, double RPM)
   V1 = -(sqrt(3) * cosine + sine) * 0.5;
   V2 = (sqrt(3) * cosine - sine) * 0.5;
 
-  //maxSpeed = 1;
   maxSpeed = abs(V1);
   if(maxSpeed < abs(V2))
     maxSpeed = abs(V2);
@@ -56,10 +55,6 @@ void Omni::move(int angle, double RPM)
   V1 = V1 * (RPM / maxSpeed);
   V2 = V2 * (RPM / maxSpeed);
   V3 = V3 * (RPM / maxSpeed);
-
-  /*V1 = V1 * RPM;
-  V2 = V2 * RPM;
-  V3 = V3 * RPM;*/
 
   if(V1 >= 0)
     Motor1.spin(true, abs(V1));

@@ -2,25 +2,29 @@
 
 Omni myOmni;
 
+//Các mảng về cảm biến và góc
 int U[16] = {A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11, A12, A13, A14, A15};
 double irAngle[16] = {0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 190, 202.5, 225, 247.5, 290, 292.5, 315 , 337.5};
-unsigned long timeStamp = 0;
 
+//Các hằng số về cảm biến, góc
 const int irThreshold = 275;
-const int angleRange = 75;  // degrees
+const int angleRange = 75;    //Góc quét (độ)
 const int delayDuration = 5;
+
+//Các biến tìm góc
 int angle = 0;
 double newAngle = 0;
 int count = 0;
 
-const int moveSpeed = 100;
+//Các biến thời gian
+unsigned long timeStamp = 0;
 
 void setup() 
 {
   Serial.begin(9600);
   timeStamp = millis();
 
-  /*LineFollowing();
+  LineFollowing();
   
   angle += 90;
   if (angle < 0)
@@ -28,15 +32,75 @@ void setup()
   else if (angle > 360)
     angle -= 360;
   timeStamp = millis();
-  while (millis() - timeStamp <= 500)
-    myOmni.move(angle, moveSpeed);
+  while (millis() - timeStamp <= 300)
+    myOmni.move(angle, 100);
+  myOmni.stop();
   
-  LineFollowing();*/
+  LineFollowing();
+
+  angle -= 90;
+  if (angle < 0)
+    angle += 360;
+  else if (angle > 360)
+    angle -= 360;
+  timeStamp = millis();
+  while (millis() - timeStamp <= 300)
+    myOmni.move(angle, 100);
+  myOmni.stop();
+  
+  LineFollowing();
+
+  angle -= 90;
+  if (angle < 0)
+    angle += 360;
+  else if (angle > 360)
+    angle -= 360;
+  timeStamp = millis();
+  while (millis() - timeStamp <= 300)
+    myOmni.move(angle, 100);
+  myOmni.stop();
+  
+  LineFollowing();
+
+  angle += 90;
+  if (angle < 0)
+    angle += 360;
+  else if (angle > 360)
+    angle -= 360;
+  timeStamp = millis();
+  while (millis() - timeStamp <= 300)
+    myOmni.move(angle, 100);
+  myOmni.stop();
+  
+  LineFollowing();
+
+  angle += 90;
+  if (angle < 0)
+    angle += 360;
+  else if (angle > 360)
+    angle -= 360;
+  timeStamp = millis();
+  while (millis() - timeStamp <= 300)
+    myOmni.move(angle, 100);
+  myOmni.stop();
+  
+  LineFollowing();
+
+  angle -= 90;
+  if (angle < 0)
+    angle += 360;
+  else if (angle > 360)
+    angle -= 360;
+  timeStamp = millis();
+  while (millis() - timeStamp <= 300)
+    myOmni.move(angle, 100);
+  myOmni.stop();
+  
+  LineFollowing();
 }
 
 void loop() 
 {
-    myOmni.Motor1.spin(true, 250);
 }    
 
 void LineFollowing(void)
@@ -44,7 +108,6 @@ void LineFollowing(void)
   count = 0;
   while(count < 4)
   {
-    //count = 0;
     find_angle();
   
     if(count != 0)
@@ -58,7 +121,7 @@ void LineFollowing(void)
     else 
       delay(delayDuration);
   
-    myOmni.move(angle, 400);
+    myOmni.move(angle, 250);
     newAngle = 0;
   }
   myOmni.stop();
