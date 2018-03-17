@@ -33,5 +33,3 @@ class LineFollowing
   unsigned long lastCheckLineFollowing;
   unsigned long lastCheckDirectionChange;
 };
-
-

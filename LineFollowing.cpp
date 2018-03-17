@@ -9,7 +9,7 @@ void LineFollowing::lineFollowing(int speed)
   while(irCount <= 3)
   {
     findAngle();    
-    if(millis() - lastCheckLineFollowing >= 0) //Sau mỗi 5 milli giây, tìm góc mới
+    if(millis() - lastCheckLineFollowing >= 2) //Sau mỗi 2 milli giây, tìm góc mới
     {
       if(irCount != 0)
       {
@@ -17,7 +17,6 @@ void LineFollowing::lineFollowing(int speed)
         angle = (int)(angleSum * 1.0 / irCount); 
         if(angle < 0)
           angle += 360;
-        //angle = round(angleSum);
       }
       lastCheckLineFollowing = millis();
     }
@@ -90,4 +89,3 @@ void LineFollowing::directionChange(int deltaAngle)
     myOmni.move(angle, 150);
   myOmni.stop();
 }
-

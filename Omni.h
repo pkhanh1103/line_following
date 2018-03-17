@@ -1,5 +1,4 @@
 #include <SMotor.h>
-#include "definition.h"
 
 class Omni
 {

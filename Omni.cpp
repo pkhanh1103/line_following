@@ -1,8 +1,9 @@
 #include "Omni.h"
+#include "definition.h"
 
 const int sampleRate = 7;
 const double kp = 7;
-const double ki = 10;
+const double ki = 12;
 const double kd = 0.02;
 
 Omni::Omni():
@@ -22,23 +23,23 @@ void Omni::stop(void)
   Motor3.stop();
 }
 
-void Omni::rotate(boolean typeRot, double RPM)
+void Omni::rotate(boolean typeRot, double speed)
 {
   if (typeRot == true)
   {
-    Motor1.spin(true, RPM);
-    Motor2.spin(true, RPM);
-    Motor3.spin(true, RPM);
+    Motor1.spin(true, speed);
+    Motor2.spin(true, speed);
+    Motor3.spin(true, speed);
   }
   else
   {
-    Motor1.spin(false, RPM);
-    Motor2.spin(false, RPM);
-    Motor3.spin(false, RPM);
+    Motor1.spin(false, speed);
+    Motor2.spin(false, speed);
+    Motor3.spin(false, speed);
   }
 }
 
-void Omni::move(int angle, double RPM)
+void Omni::move(int angle, double speed)
 {
   sine = sin(angle * PI / 180.0);
   cosine = cos(angle * PI / 180.0);
@@ -52,9 +53,9 @@ void Omni::move(int angle, double RPM)
   if(maxSpeed < abs(V3))
     maxSpeed = abs(V3);
 
-  V1 = V1 * (RPM / maxSpeed);
-  V2 = V2 * (RPM / maxSpeed);
-  V3 = V3 * (RPM / maxSpeed);
+  V1 = V1 * (speed / maxSpeed);
+  V2 = V2 * (speed / maxSpeed);
+  V3 = V3 * (speed / maxSpeed);
 
   if(V1 >= 0)
     Motor1.spin(true, abs(V1));

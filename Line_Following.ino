@@ -13,6 +13,12 @@ void setup()
   myRobot.lineFollowing(speed);
   myRobot.directionChange(-90);
   myRobot.lineFollowing(speed);
+  myRobot.directionChange(90);
+  myRobot.lineFollowing(speed);
+  myRobot.directionChange(90);
+  myRobot.lineFollowing(speed);
+  myRobot.directionChange(-90);
+  myRobot.lineFollowing(speed);
 }
 
 void loop() 
