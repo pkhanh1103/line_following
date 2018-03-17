@@ -19,15 +19,15 @@ class LineFollowing
   double irAngle[16] = {0, 22.5, 45, 67.5, 90, 112.5, 135, 157.5, 190, 202.5, 225, 247.5, 290, 292.5, 315 , 337.5};
 
   /* ----- Các hằng số về cảm biến, góc ----- */
-  const int irThreshold = 275;
-  const int angleRange = 75;    //Vùng góc được quét (độ) - vùng quét càng nhỏ, đi càng mượt nhưng khả năng phát
+  const int irThreshold = 325;
+  const int angleRange = 60;    //Vùng góc được quét (độ) - vùng quét càng nhỏ, đi càng mượt nhưng khả năng phát
                                 //hiện ngã ba/ngã tư càng thấp
                                 //Góc quét nên dao động từ 60 đến 75 độ
 
   /* ----- Các biến tìm góc ----- */
   int angle = 0;
-  double newAngle = 0;
   int irCount = 0;      //Số cảm biến nằm trên line
+  double angleSum = 0;  //Tổng các góc dựa trên số cảm biến nằm trên line
 
   /* ----- Các biến lưu thời gian ----- */
   unsigned long lastCheckLineFollowing;

@@ -1,8 +1,8 @@
 #include "Omni.h"
 
-const int sampleRate = 10;
+const int sampleRate = 7;
 const double kp = 7;
-const double ki = 7;
+const double ki = 10;
 const double kd = 0.02;
 
 Omni::Omni():

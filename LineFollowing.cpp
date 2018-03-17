@@ -1,6 +1,5 @@
 #include "LineFollowing.h"
 
-/* ----- Nội dung các hàm ----- */
 void LineFollowing::lineFollowing(int speed)   
 {
   irCount = 0;
@@ -10,24 +9,25 @@ void LineFollowing::lineFollowing(int speed)
   while(irCount <= 3)
   {
     findAngle();    
-    if(millis() - lastCheckLineFollowing >= 5) //Sau mỗi 5 milli giây, tìm góc mới
+    if(millis() - lastCheckLineFollowing >= 0) //Sau mỗi 5 milli giây, tìm góc mới
     {
       if(irCount != 0)
       {
         //Góc mới bằng trung bình của tổng các góc đang nằm trên line
-        newAngle = (int)(newAngle * 1.0 / irCount); 
-        if(newAngle < 0)
-          newAngle += 360;
-        angle = round(newAngle);
+        angle = (int)(angleSum * 1.0 / irCount); 
+        if(angle < 0)
+          angle += 360;
+        //angle = round(angleSum);
       }
       lastCheckLineFollowing = millis();
     }
     myOmni.move(angle, speed);
-    newAngle = 0;
+    angleSum = 0;
   }
 
   //Dừng lại tại ngã ba/ngã tư
   myOmni.stop();
+  delay(100);
 }
 
 void LineFollowing::findAngle(void)
@@ -52,7 +52,7 @@ void LineFollowing::findAngle(void)
         value = analogRead(U[i]);
         if(value > irThreshold) 
         {
-          newAngle += irAngle[i];
+          angleSum += irAngle[i];
           irCount ++;          
         } 
       }     
@@ -67,9 +67,9 @@ void LineFollowing::findAngle(void)
         if (value > irThreshold) 
         {
           if(irAngle[i] <= maxAngle)
-            newAngle += irAngle[i];
+            angleSum += irAngle[i];
           else
-            newAngle += (irAngle[i] - 360);
+            angleSum += (irAngle[i] - 360);
           irCount ++;
         } 
       }       
@@ -86,8 +86,8 @@ void LineFollowing::directionChange(int deltaAngle)
     angle -= 360;
   
   lastCheckDirectionChange = millis();
-  while(millis() - lastCheckDirectionChange <= 100)
-    myOmni.move(angle, 200);
+  while(millis() - lastCheckDirectionChange <= 200)
+    myOmni.move(angle, 150);
   myOmni.stop();
 }
 
