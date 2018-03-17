@@ -8,7 +8,7 @@ void LineFollowing::lineFollowing(int speed)
   //Khi gặp ngã ba/ngã tư, số cảm biến trên line lớn hơn 3
   while(irCount <= 3)
   {
-    findAngle();    
+    findAngle();
     if(millis() - lastCheckLineFollowing >= 2) //Sau mỗi 2 milli giây, tìm góc mới
     {
       if(irCount != 0)
@@ -20,6 +20,7 @@ void LineFollowing::lineFollowing(int speed)
       }
       lastCheckLineFollowing = millis();
     }
+
     myOmni.move(angle, speed);
     angleSum = 0;
   }
@@ -27,6 +28,7 @@ void LineFollowing::lineFollowing(int speed)
   //Dừng lại tại ngã ba/ngã tư
   myOmni.stop();
   delay(100);
+
 }
 
 void LineFollowing::findAngle(void)

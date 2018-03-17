@@ -1,19 +1,11 @@
 #include "Omni.h"
 #include "definition.h"
 
-const int sampleRate = 7;
-const double kp = 7;
-const double ki = 12;
-const double kd = 0.02;
-
 Omni::Omni():
   Motor1(IN1, IN2, EN1, A1, B1),
   Motor2(IN3, IN4, EN2, A2, B2),
   Motor3(IN5, IN6, EN3, A3, B3)
 {
-  Motor1.pidSet(kp, ki, kd, sampleRate);
-  Motor2.pidSet(kp, ki, kd, sampleRate);
-  Motor3.pidSet(kp, ki, kd, sampleRate);    
 }
 
 void Omni::stop(void)
